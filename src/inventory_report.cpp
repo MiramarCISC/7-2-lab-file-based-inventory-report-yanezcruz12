@@ -21,7 +21,7 @@ double calculateItemValue(const InventoryItem& item) {
         return 0.0;
     }
 
-    // Calculate the total value of the item.
+    // Calculates the total value of the item.
     return item.quantity * item.price;
 }
 
@@ -31,10 +31,10 @@ int readInventoryFile(string filename, InventoryItem items[], int maxItems) {
         return 0;
     }
 
-    // Open the input file.
+    // Opens the input file.
     ifstream in(filename);
 
-    // Return 0 if the file could not be opened.
+    // Returns 0 if the file could not be opened.
     if (!in.is_open()) {
         return 0;
     }
@@ -49,7 +49,7 @@ int readInventoryFile(string filename, InventoryItem items[], int maxItems) {
               >> item.quantity
               >> item.price) {
 
-        // Store only records with valid quantities and prices.
+        // Stores only records with valid quantities and prices.
         if (isValidQuantity(item.quantity) &&
             isValidPrice(item.price)) {
             items[count] = item;
@@ -69,10 +69,10 @@ bool writeInventoryReport(string filename, const InventoryItem items[], int coun
         return false;
     }
 
-    // Open the output file.
+    // Opens the output file.
     ofstream out(filename);
 
-    // Return false if the file could not be opened.
+    // Returns false if the file could not be opened.
     if (!out.is_open()) {
         return false;
     }
@@ -83,7 +83,7 @@ bool writeInventoryReport(string filename, const InventoryItem items[], int coun
     out << "Inventory Report" << endl;
     out << "SKU Name Quantity Price Value" << endl;
 
-    // Write each inventory item to the report.
+    // Writes each inventory item to the report.
     for (int i = 0; i < count; i++) {
         out << items[i].sku << " "
             << items[i].name << " "
@@ -113,7 +113,7 @@ double calculateTotalInventoryValue(const InventoryItem items[], int count) {
 
     double total = 0.0;
 
-    // Add the value of every item.
+    // Adds the value of every item.
     for (int i = 0; i < count; i++) {
         total += calculateItemValue(items[i]);
     }
@@ -143,10 +143,10 @@ int findHighestValueItemIndex(const InventoryItem items[], int count) {
         return -1;
     }
 
-    // Begin by treating the first item as the highest.
+    // Start by treating the first item as the highest.
     int highestIndex = 0;
 
-    // Compare the remaining items.
+    // Next compare the remaining items.
     for (int i = 1; i < count; i++) {
         if (calculateItemValue(items[i]) >
             calculateItemValue(items[highestIndex])) {
